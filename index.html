@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MinevaID - Toko Skin Minecraft Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4d97ff;
+            --primary-dark: #2a75ff;
+            --secondary: #ffaa00;
+            --secondary-dark: #e69500;
+            --accent: #ff6b6b;
+            --light-blue: #e6f2ff;
+            --light: #ffffff;
+            --dark: #1a1a2e;
+            --gray: #2d3047;
+            --pixel-border: #3a3d5d;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --diamond: #b9f2ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(77, 151, 255, 0.1) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(255, 170, 0, 0.1) 0%, transparent 55%);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        /* Efek Teks Berkilau */
+        .shimmer-text {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s infinite linear;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .shimmer-text::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.6) 50%, 
+                transparent 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer-highlight 3s infinite linear;
+            mix-blend-mode: overlay;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 300% 0%;
+            }
+        }
+        
+        @keyframes shimmer-highlight {
+            0% {
+                background-position: -200% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+        
+        /* Efek kilauan partikel */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            box-shadow: 0 0 6px 2px white;
+            z-index: 10;
+        }
+        
+        .sparkle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-toggle {
+            position: relative;
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(77, 151, 255, 0.1);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1001;
+        }
+        
+        .logo i {
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .logo-text .shimmer-part {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s infinite linear;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-text span {
+            color: var(--secondary);
+        }
+        
+        nav {
+            transition: all 0.3s ease;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+            background-color: rgba(77, 151, 255, 0.1);
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            color: var(--dark);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 100px;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(77, 151, 255, 0.9) 0%, rgba(42, 117, 255, 0.9) 100%), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .pixel-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            border: 3px solid var(--pixel-border);
+            box-shadow: 8px 8px 0 rgba(42, 117, 255, 0.3);
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 rgba(42, 117, 255, 0.2);
+            line-height: 1.3;
+            position: relative;
+        }
+        
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 0;
+            transition: all 0.3s;
+            border: 3px solid var(--secondary-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 5px 5px 0 rgba(230, 149, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 0 rgba(230, 149, 0, 0.3);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 22px;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .category-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: var(--light-blue);
+            border-radius: 0;
+            overflow: hidden;
+            width: 100%;
+            max-width: 320px;
+            transition: all 0.3s;
+            border: 3px solid var(--pixel-border);
+            cursor: pointer;
+            box-shadow: 6px 6px 0 rgba(77, 151, 255, 0.2);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 10px 10px 0 rgba(77, 151, 255, 0.3);
+        }
+        
+        .category-img {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            image-rendering: pixelated;
+            border-bottom: 3px solid var(--pixel-border);
+        }
+        
+        .regular .category-img {
+            background-image: url('https://images.unsplash.com/photo-1630156704043-3f9c5c2e9bc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+        }
+        
+        .special .category-img {
+            background-image: url('https://images.unsplash.com/photo-1531315630201-bb15abeb1653?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+        }
+        
+        .couple .category-img {
+            background-image: url('https://images.unsplash.com/photo-1621330396175-92a4348e2e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+        }
+        
+        .category-content {
+            padding: 18px;
+            text-align: center;
+        }
+        
+        .category-title {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.4;
+        }
+        
+        .category-desc {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .pixel-button {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 11px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            min-width: 140px;
+            overflow: hidden;
+        }
+        
+        .pixel-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .pixel-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 0 rgba(42, 117, 255, 0.3);
+        }
+        
+        .pixel-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Catalog Section */
+        .catalog {
+            padding: 60px 0;
+            background-color: var(--light-blue);
+        }
+        
+        .category-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            background-color: var(--light);
+            color: var(--dark);
+            border: 2px solid var(--pixel-border);
+            padding: 10px 16px;
+            border-radius: 0;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Press Start 2P', cursive;
+            min-width: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(77, 151, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+        
+        .category-btn:hover:not(.active) {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+        
+        .category-btn:hover::before {
+            left: 100%;
+        }
+        
+        .skin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .skin-card {
+            background-color: var(--light);
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 3px solid var(--pixel-border);
+            box-shadow: 5px 5px 0 rgba(77, 151, 255, 0.1);
+        }
+        
+        .skin-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 8px 8px 0 rgba(77, 151, 255, 0.2);
+        }
+        
+        .skin-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            image-rendering: pixelated;
+            border-bottom: 3px solid var(--pixel-border);
+        }
+        
+        .skin-content {
+            padding: 16px;
+        }
+        
+        .skin-name {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.4;
+        }
+        
+        .skin-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .skin-price::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold), var(--secondary));
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        
+        .skin-desc {
+            color: var(--gray);
+            font-size: 13px;
+            margin-bottom: 18px;
+            height: 60px;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+        
+        .skin-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .btn-detail, .btn-buy {
+            padding: 9px 12px;
+            border-radius: 0;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 9px;
+            flex: 1;
+            text-align: center;
+            min-height: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-detail::before, .btn-buy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .btn-detail {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-detail:hover {
+            background-color: rgba(77, 151, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-detail:hover::before {
+            left: 100%;
+        }
+        
+        .btn-buy {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary-dark);
+        }
+        
+        .btn-buy:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-buy:hover::before {
+            left: 100%;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(26, 26, 46, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 15px;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: var(--light);
+            width: 100%;
+            max-width: 800px;
+            border-radius: 0;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px);
+            transition: transform 0.5s;
+            border: 5px solid var(--pixel-border);
+            box-shadow: 10px 10px 0 rgba(42, 117, 255, 0.3);
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            min-width: 40px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .modal-img {
+            flex: 1;
+            min-height: 250px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--pixel-border);
+            image-rendering: pixelated;
+        }
+        
+        .modal-content {
+            flex: 1;
+        }
+        
+        .modal-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-family: 'Press Start 2P', cursive;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .modal-price::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold), var(--diamond), var(--secondary));
+            background-size: 300% 100%;
+            animation: shimmer 4s infinite linear;
+        }
+        
+        .modal-desc {
+            margin-bottom: 18px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .modal-specs {
+            margin-bottom: 22px;
+        }
+        
+        .specs-title {
+            font-size: 15px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .specs-list {
+            list-style-type: none;
+        }
+        
+        .specs-list li {
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(77, 151, 255, 0.2);
+            color: var(--gray);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .specs-list li:before {
+            content: '▸';
+            color: var(--secondary);
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .whatsapp-order {
+            background-color: #25D366;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            transition: all 0.3s;
+            border: 3px solid #1da851;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 5px 5px 0 rgba(29, 168, 81, 0.3);
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-order::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .whatsapp-order:hover {
+            background-color: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 6px 6px 0 rgba(29, 168, 81, 0.3);
+        }
+        
+        .whatsapp-order:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            padding: 40px 0 20px;
+            color: var(--light);
+            border-top: 5px solid var(--primary);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col {
+            flex: 1;
+        }
+        
+        .footer-title {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-links i {
+            width: 20px;
+            margin-right: 8px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray);
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        /* Minecraft Block Decoration */
+        .minecraft-block {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            image-rendering: pixelated;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .block-grass {
+            background-color: #7CFC00;
+            border: 2px solid #5A9C00;
+        }
+        
+        .block-dirt {
+            background-color: #8B4513;
+            border: 2px solid #5D2E0C;
+        }
+        
+        .block-stone {
+            background-color: #808080;
+            border: 2px solid #595959;
+        }
+        
+        .block-water {
+            background-color: #1E90FF;
+            border: 2px solid #0066CC;
+        }
+        
+        /* Animation for cart */
+        @keyframes cartBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .cart-bounce {
+            animation: cartBounce 0.3s ease;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .modal-body {
+                flex-direction: row;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            /* Mobile Navigation */
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .mobile-cart-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--light);
+                padding: 80px 20px 20px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+            }
+            
+            nav ul li {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 16px;
+                border-bottom: 1px solid rgba(77, 151, 255, 0.1);
+                border-radius: 0;
+            }
+            
+            .cart-icon.desktop {
+                display: none;
+            }
+            
+            /* Hero Section */
+            .hero {
+                padding-top: 90px;
+                min-height: 70vh;
+            }
+            
+            .hero h1 {
+                font-size: 24px;
+            }
+            
+            .hero p {
+                font-size: 15px;
+            }
+            
+            .hero-content {
+                padding: 20px 15px;
+                margin: 0 10px;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 14px;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            /* Categories */
+            .categories {
+                padding: 40px 0;
+            }
+            
+            .section-title {
+                font-size: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .category-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-card {
+                max-width: 100%;
+            }
+            
+            /* Catalog */
+            .catalog {
+                padding: 40px 0;
+            }
+            
+            .category-selector {
+                gap: 8px;
+                margin-bottom: 25px;
+            }
+            
+            .category-btn {
+                padding: 10px 12px;
+                font-size: 12px;
+                min-width: 90px;
+                flex: 1;
+                max-width: 120px;
+            }
+            
+            .skin-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .skin-img {
+                height: 150px;
+            }
+            
+            .skin-name {
+                font-size: 14px;
+            }
+            
+            .skin-price {
+                font-size: 16px;
+            }
+            
+            .skin-desc {
+                font-size: 12px;
+                height: 54px;
+            }
+            
+            .btn-detail, .btn-buy {
+                padding: 8px 10px;
+                font-size: 8px;
+                min-height: 36px;
+            }
+            
+            /* Modal */
+            .modal {
+                max-height: 85vh;
+            }
+            
+            .modal-header {
+                padding: 14px;
+            }
+            
+            .modal-title {
+                font-size: 16px;
+            }
+            
+            .modal-body {
+                padding: 16px;
+                gap: 20px;
+            }
+            
+            .modal-img {
+                min-height: 200px;
+            }
+            
+            .modal-price {
+                font-size: 20px;
+            }
+            
+            .modal-desc {
+                font-size: 14px;
+            }
+            
+            .specs-title {
+                font-size: 14px;
+            }
+            
+            .specs-list li {
+                font-size: 13px;
+            }
+            
+            .whatsapp-order {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+            
+            /* Footer */
+            footer {
+                padding: 30px 0 15px;
+            }
+            
+            .footer-content {
+                gap: 25px;
+            }
+            
+            .footer-title {
+                font-size: 15px;
+            }
+            
+            .footer-links a {
+                font-size: 13px;
+            }
+            
+            .copyright {
+                font-size: 12px;
+            }
+            
+            /* Hide desktop blocks on mobile */
+            .minecraft-block {
+                display: none;
+            }
+            
+            .logo-text {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .skin-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 22px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+            }
+            
+            .category-btn {
+                min-width: 80px;
+                padding: 9px 10px;
+                font-size: 11px;
+            }
+            
+            .skin-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .btn-detail, .btn-buy {
+                width: 100%;
+            }
+            
+            .modal-overlay {
+                padding: 10px;
+            }
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Touch-friendly improvements */
+        button, 
+        a, 
+        input, 
+        select, 
+        textarea {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        button, 
+        a.cta-button, 
+        .btn-detail, 
+        .btn-buy, 
+        .pixel-button, 
+        .category-btn {
+            touch-action: manipulation;
+            user-select: none;
+        }
+        
+        /* Prevent text size adjustment on orientation change */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Minecraft Blocks Decoration (Desktop only) -->
+    <div class="minecraft-block block-grass" style="top: 10%; left: 5%;"></div>
+    <div class="minecraft-block block-dirt" style="top: 15%; right: 8%;"></div>
+    <div class="minecraft-block block-stone" style="bottom: 20%; left: 10%;"></div>
+    <div class="minecraft-block block-water" style="bottom: 15%; right: 15%;"></div>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+                <div class="logo-text"><span class="shimmer-part">MinevaID_</span></div>
+            </div>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Mobile Cart Toggle -->
+            <button class="mobile-cart-toggle" id="mobileCartToggle">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="mobile-cart-count">0</span>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home" class="nav-link">Beranda</a></li>
+                    <li><a href="#categories" class="nav-link">Kategori</a></li>
+                    <li><a href="catalog.html" class="nav-link">Katalog</a></li>
+                    <li><a href="contact.html" class="nav-link">Kontak</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon desktop" id="cartIcon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="pixel-grid"></div>
+        <div class="sparkle-container" id="heroSparkles"></div>
+        <div class="container hero-content">
+            <h1 class="shimmer-text">MinevaID Store</h1>
+            <p>Temukan skin Minecraft terbaik dengan desain pixel unik. Tingkatkan pengalaman bermain Anda dengan skin eksklusif dari toko kami!</p>
+            <a href="catalog.html" class="cta-button">Lihat Katalog Skin</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">KATEGORI SKIN</h2>
+            <div class="category-cards">
+                <div class="category-card regular" data-category="regular">
+                    <div class="category-img"></div>
+                    <div class="category-content">
+                        <h3 class="category-title">Skin Reguler</h3>
+                        <p class="category-desc">Skin dengan desain standar yang cocok untuk pemain baru atau yang menyukai gaya klasik Minecraft.</p>
+                        <button class="pixel-button" data-category="regular">Lihat Skin</button>
+                    </div>
+                </div>
+                
+                <div class="category-card special" data-category="special">
+                    <div class="category-img"></div>
+                    <div class="category-content">
+                        <h3 class="category-title">Skin Spesial</h3>
+                        <p class="category-desc">Skin eksklusif dengan desain unik dan detail yang lebih kompleks untuk pengalaman bermain yang lebih seru.</p>
+                        <button class="pixel-button" data-category="special">Lihat Skin</button>
+                    </div>
+                </div>
+                
+                <div class="category-card couple" data-category="couple">
+                    <div class="category-img"></div>
+                    <div class="category-content">
+                        <h3 class="category-title">Skin Couple</h3>
+                        <p class="category-desc">Skin yang dirancang berpasangan, cocok untuk Anda yang ingin bermain bersama teman atau pasangan.</p>
+                        <button class="pixel-button" data-category="couple">Lihat Skin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog" id="catalog">
+        <div class="container">
+            <h2 class="section-title">KATALOG SKIN</h2>
+            
+            <div class="category-selector">
+                <button class="category-btn active" data-filter="all">Semua</button>
+                <button class="category-btn" data-filter="regular">Reguler</button>
+                <button class="category-btn" data-filter="special">Spesial</button>
+                <button class="category-btn" data-filter="couple">Couple</button>
+            </div>
+            
+            <div class="skin-grid" id="skinGrid">
+                <!-- Skin cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Skin Details -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Detail Skin</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-img" id="modalImg"></div>
+                <div class="modal-content">
+                    <h2 class="modal-name shimmer-text" id="modalName">Nama Skin</h2>
+                    <div class="modal-price" id="modalPrice">Rp 0</div>
+                    <p class="modal-desc" id="modalDesc">Deskripsi skin</p>
+                    
+                    <div class="modal-specs">
+                        <h4 class="specs-title">Spesifikasi:</h4>
+                        <ul class="specs-list" id="modalSpecs">
+                            <!-- Specifications will be added by JavaScript -->
+                        </ul>
+                    </div>
+                    
+                    <a href="#" class="whatsapp-order" id="whatsappOrder" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3 class="footer-title shimmer-text">MinevaID</h3>
+                    <p>Toko skin Minecraft terpercaya dengan koleksi skin premium berkualitas tinggi. Kami menyediakan berbagai skin dengan desain pixel unik dan menarik.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kategori</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-filter="regular"><i class="fas fa-cube"></i>Skin Reguler</a></li>
+                        <li><a href="#" data-filter="special"><i class="fas fa-star"></i>Skin Spesial</a></li>
+                        <li><a href="#" data-filter="couple"><i class="fas fa-heart"></i>Skin Couple</a></li>
+                        <li><a href="#catalog"><i class="fas fa-th-list"></i>Semua Skin</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontak Kami</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+6281223101244"><i class="fas fa-phone"></i>+62 812-2310-1244</a></li>
+                        <li><a href="mailto:info@MinevaID.com"><i class="fas fa-envelope"></i>info@MinevaID.com</a></li>
+                        <li><a href="#" id="whatsappContact"><i class="fab fa-whatsapp"></i>WhatsApp: +62 812-3456-7890</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i>Jakarta, Indonesia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 <span class="shimmer-text" style="font-size: 14px;">MinevaID</span>. All rights reserved. Minecraft is a trademark of Mojang AB.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data skin produk dengan tema Minecraft
+        const skins = [
+            {
+                id: 1,
+                name: "Pixel Warrior",
+                category: "special",
+                price: 75000,
+                description: "Skin dengan desain pixel warrior yang epik. Detail yang sangat bagus dengan tekstur pixel berkualitas tinggi.",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Pixel Warrior"]
+            },
+            {
+                id: 2,
+                name: "Cyber Miner",
+                category: "special",
+                price: 85000,
+                description: "Skin futuristic dengan tema miner cyberpunk. Cocok untuk pemain yang menyukai gaya teknologi tinggi.",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1468&q=80",
+                specs: ["Resolusi: 128x128", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Cyber Miner"]
+            },
+            {
+                id: 3,
+                name: "Forest Explorer",
+                category: "regular",
+                price: 45000,
+                description: "Skin dengan tema penjelajah hutan yang cocok untuk pemain yang suka bertualang di bioma hutan.",
+                image: "https://images.unsplash.com/photo-1531315630201-bb15abeb1653?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Forest Explorer"]
+            },
+            {
+                id: 4,
+                name: "Knight Pixel",
+                category: "regular",
+                price: 50000,
+                description: "Skin kesatria dengan armor pixel yang cocok untuk bertarung melawan mob berbahaya.",
+                image: "https://images.unsplash.com/photo-1630156704043-3f9c5c2e9bc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Knight Pixel"]
+            },
+            {
+                id: 5,
+                name: "Pixel Couple",
+                category: "couple",
+                price: 120000,
+                description: "Skin pasangan dengan tema pixel yang romantis. Cocok untuk bermain bersama pasangan.",
+                image: "https://images.unsplash.com/photo-1621330396175-92a4348e2e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64 (2 skin)", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Pixel Couple"]
+            },
+            {
+                id: 6,
+                name: "Ocean Pixel",
+                category: "regular",
+                price: 40000,
+                description: "Skin penjelajah lautan dengan detail peralatan menyelam pixel. Cocok untuk petualangan bawah laut.",
+                image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Ocean Pixel"]
+            },
+            {
+                id: 7,
+                name: "Phoenix Pixel",
+                category: "special",
+                price: 90000,
+                description: "Skin legendaris dengan tema burung phoenix pixel. Skin eksklusif dengan detail api yang mengagumkan.",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 128x128", "Format: PNG", "Kompatibel: Java Edition", "Animasi: Efek partikel", "Eksklusif: Ya", "Tema: Phoenix Pixel"]
+            },
+            {
+                id: 8,
+                name: "Hero & Villain Pixel",
+                category: "couple",
+                price: 150000,
+                description: "Skin pasangan pahlawan dan penjahat pixel. Cocok untuk roleplay dengan teman atau pasangan.",
+                image: "https://images.unsplash.com/photo-1621330396175-92a4348e2e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64 (2 skin)", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Hero & Villain"]
+            }
+        ];
+
+        // Elemen DOM
+        const skinGrid = document.getElementById('skinGrid');
+        const categoryButtons = document.querySelectorAll('.category-btn[data-filter]');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModal = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalName = document.getElementById('modalName');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalImg = document.getElementById('modalImg');
+        const modalSpecs = document.getElementById('modalSpecs');
+        const whatsappOrder = document.getElementById('whatsappOrder');
+        const whatsappContact = document.getElementById('whatsappContact');
+        const categoryCards = document.querySelectorAll('.category-card');
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCountElements = document.querySelectorAll('.cart-count, .mobile-cart-count');
+        const heroSparkles = document.getElementById('heroSparkles');
+        
+        // Mobile navigation elements
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileCartToggle = document.getElementById('mobileCartToggle');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mainNav = document.getElementById('mainNav');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Format harga ke Rupiah
+        function formatRupiah(price) {
+            return `Rp ${price.toLocaleString('id-ID')}`;
+        }
+
+        // Update cart display
+        function updateCartCount() {
+            // Ambil cart dari localStorage
+            const cart = JSON.parse(localStorage.getItem('minevaid_cart')) || [];
+            
+            // Hitung total quantity
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            // Update semua elemen yang menampilkan jumlah cart
+            cartCountElements.forEach(el => {
+                el.textContent = totalCount;
+            });
+        }
+
+        // Fungsi untuk membuat efek kilauan partikel
+        function createSparkles() {
+            if (!heroSparkles) return;
+            
+            // Hanya buat efek kilauan di desktop
+            if (window.innerWidth <= 767) return;
+            
+            // Bersihkan sparkle sebelumnya
+            heroSparkles.innerHTML = '';
+            
+            // Buat 15 sparkle
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                // Posisi acak
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = 1 + Math.random() * 2;
+                const size = 2 + Math.random() * 4;
+                
+                sparkle.style.cssText = `
+                    left: ${left}%;
+                    top: ${top}%;
+                    width: ${size}px;
+                    height: ${size}px;
+                    animation: sparkleAnim ${duration}s ease-in-out ${delay}s infinite;
+                `;
+                
+                heroSparkles.appendChild(sparkle);
+            }
+            
+            // Tambahkan keyframes untuk animasi sparkle
+            const style = document.createElement('style');
+            if (!document.querySelector('#sparkle-anim')) {
+                style.id = 'sparkle-anim';
+                style.textContent = `
+                    @keyframes sparkleAnim {
+                        0%, 100% {
+                            opacity: 0;
+                            transform: scale(0.5) rotate(0deg);
+                        }
+                        50% {
+                            opacity: 1;
+                            transform: scale(1) rotate(180deg);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // Close mobile menu
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Render skin cards
+        function renderSkins(filter = 'all') {
+            skinGrid.innerHTML = '';
+            
+            const filteredSkins = filter === 'all' 
+                ? skins 
+                : skins.filter(skin => skin.category === filter);
+            
+            filteredSkins.forEach(skin => {
+                const skinCard = document.createElement('div');
+                skinCard.className = 'skin-card';
+                skinCard.dataset.category = skin.category;
+                
+                skinCard.innerHTML = `
+                    <div class="skin-img" style="background-image: url('${skin.image}')"></div>
+                    <div class="skin-content">
+                        <h3 class="skin-name">${skin.name}</h3>
+                        <div class="skin-price">${formatRupiah(skin.price)}</div>
+                        <p class="skin-desc">${skin.description}</p>
+                        <div class="skin-actions">
+                            <button class="btn-detail" data-id="${skin.id}">Detail</button>
+                            <button class="btn-buy" data-id="${skin.id}">Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+                `;
+                
+                skinGrid.appendChild(skinCard);
+            });
+            
+            // Add event listeners to detail buttons
+            document.querySelectorAll('.btn-detail').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const skinId = parseInt(e.target.dataset.id);
+                    showSkinDetails(skinId);
+                    closeMobileMenu();
+                });
+            });
+            
+            // Add event listeners to buy buttons
+            document.querySelectorAll('.btn-buy').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const skinId = parseInt(e.target.dataset.id);
+                    addToCart(skinId);
+                    closeMobileMenu();
+                });
+            });
+        }
+
+        // Show skin details in modal
+        function showSkinDetails(skinId) {
+            const skin = skins.find(s => s.id === skinId);
+            if (!skin) return;
+            
+            modalTitle.textContent = 'Detail Skin';
+            modalName.textContent = skin.name;
+            modalPrice.textContent = formatRupiah(skin.price);
+            modalDesc.textContent = skin.description;
+            modalImg.style.backgroundImage = `url('${skin.image}')`;
+            
+            // Clear previous specs
+            modalSpecs.innerHTML = '';
+            
+            // Add new specs
+            skin.specs.forEach(spec => {
+                const li = document.createElement('li');
+                li.textContent = spec;
+                modalSpecs.appendChild(li);
+            });
+            
+            // Set WhatsApp link
+            const phoneNumber = "6281223101244";
+            const message = `Halo, saya ingin memesan skin Minecraft:\n\nNama: ${skin.name}\nHarga: ${formatRupiah(skin.price)}\n\nApakah skin ini tersedia?`;
+            const encodedMessage = encodeURIComponent(message);
+            whatsappOrder.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Show modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            closeMobileMenu();
+        }
+
+        // Add item to cart
+        function addToCart(skinId) {
+            // Ambil cart dari localStorage
+            let cart = JSON.parse(localStorage.getItem('minevaid_cart')) || [];
+            
+            // Cek apakah item sudah ada di cart
+            const existingItem = cart.find(item => item.id === skinId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id: skinId, quantity: 1 });
+            }
+            
+            // Simpan ke localStorage
+            localStorage.setItem('minevaid_cart', JSON.stringify(cart));
+            
+            // Update tampilan cart count
+            updateCartCount();
+            
+            // Find skin
+            const skin = skins.find(s => s.id === skinId);
+            
+            // Add bounce animation to cart icon
+            cartIcon.classList.add('cart-bounce');
+            setTimeout(() => {
+                cartIcon.classList.remove('cart-bounce');
+            }, 300);
+            
+            // Show notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: var(--primary);
+                color: white;
+                padding: 12px 16px;
+                border-radius: 0;
+                z-index: 10000;
+                border: 3px solid var(--primary-dark);
+                box-shadow: 5px 5px 0 rgba(42, 117, 255, 0.3);
+                animation: slideIn 0.3s ease;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 11px;
+                max-width: 280px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <div><strong>${skin.name}</strong> ditambahkan ke keranjang!</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+            
+            closeMobileMenu();
+        }
+
+        // Filter skins by category
+        function filterSkins(category) {
+            // Update active button
+            categoryButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === category) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Render filtered skins
+            renderSkins(category);
+            
+            // Close mobile menu on mobile
+            if (window.innerWidth <= 767) {
+                closeMobileMenu();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render all skins initially
+            renderSkins();
+            updateCartCount();
+            
+            // Buat efek kilauan
+            createSparkles();
+            
+            // Set WhatsApp contact link
+            const phoneNumber = "6281223101244";
+            const contactMessage = `Halo MinevaID, saya ingin bertanya tentang skin Minecraft.`;
+            const encodedContactMessage = encodeURIComponent(contactMessage);
+            whatsappContact.href = `https://wa.me/${phoneNumber}?text=${encodedContactMessage}`;
+            
+            // Mobile navigation toggle
+            mobileNavToggle.addEventListener('click', toggleMobileMenu);
+            mobileCartToggle.addEventListener('click', () => {
+                // Redirect to cart page
+                window.location.href = 'cart.html';
+                closeMobileMenu();
+            });
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Close mobile menu when clicking on nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Add event listeners to category filter buttons
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.dataset.filter;
+                    filterSkins(filter);
+                });
+            });
+            
+            // Add event listeners to category cards
+            categoryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const category = card.dataset.category;
+                    filterSkins(category);
+                    
+                    // Scroll to catalog section
+                    document.getElementById('catalog').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Add event listeners to footer category links
+            document.querySelectorAll('.footer-links a[data-filter]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const filter = e.target.dataset.filter;
+                    filterSkins(filter);
+                    
+                    // Scroll to catalog section
+                    document.getElementById('catalog').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', () => {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                @keyframes slideOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    // Skip if it's a filter link
+                    if (this.hasAttribute('data-filter')) return;
+                    
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 767) {
+                    closeMobileMenu();
+                }
+                // Recreate sparkles on resize
+                createSparkles();
+            });
+            
+            // Recreate sparkles setiap 10 detik untuk efek dinamis
+            setInterval(createSparkles, 10000);
+        });
+    </script>
+</body>
+</html>

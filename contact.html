@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kontak - MinevaID</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary: #4d97ff;
+            --primary-dark: #2a75ff;
+            --secondary: #ffaa00;
+            --secondary-dark: #e69500;
+            --accent: #ff6b6b;
+            --light-blue: #e6f2ff;
+            --light: #ffffff;
+            --dark: #1a1a2e;
+            --gray: #2d3047;
+            --pixel-border: #3a3d5d;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --diamond: #b9f2ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(77, 151, 255, 0.1) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(255, 170, 0, 0.1) 0%, transparent 55%);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        /* Efek Teks Berkilau */
+        .shimmer-text {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s infinite linear;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 300% 0%;
+            }
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-toggle {
+            position: relative;
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(77, 151, 255, 0.1);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1001;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .logo-text .shimmer-part {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s infinite linear;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        nav {
+            transition: all 0.3s ease;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 15px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+            background-color: rgba(77, 151, 255, 0.1);
+        }
+        
+        nav a.active {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            color: var(--dark);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding-top: 100px;
+            padding-bottom: 40px;
+            background-color: var(--light);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .page-header h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 40px 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        @media (min-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            background-color: var(--light);
+            padding: 30px;
+            border: 3px solid var(--pixel-border);
+            box-shadow: 8px 8px 0 rgba(42, 117, 255, 0.1);
+        }
+        
+        .info-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .info-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(77, 151, 255, 0.1);
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light-blue);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .info-content h3 {
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .info-content p {
+            color: var(--gray);
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .info-content a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .info-content a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background-color: var(--light-blue);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background-color: var(--light);
+            padding: 30px;
+            border: 3px solid var(--pixel-border);
+            box-shadow: 8px 8px 0 rgba(42, 117, 255, 0.1);
+        }
+        
+        .form-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--pixel-border);
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            background-color: var(--light-blue);
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(77, 151, 255, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Press Start 2P', cursive;
+            border: 3px solid var(--primary-dark);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 40px 0;
+            background-color: var(--light);
+        }
+        
+        .faq-title {
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .faq-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .faq-item {
+            background-color: var(--light-blue);
+            margin-bottom: 15px;
+            border: 2px solid var(--pixel-border);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(77, 151, 255, 0.1);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            padding: 40px 0 20px;
+            color: var(--light);
+            border-top: 5px solid var(--primary);
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col {
+            flex: 1;
+        }
+        
+        .footer-title {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-links i {
+            width: 20px;
+            margin-right: 8px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray);
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        /* Animation for cart */
+        @keyframes cartBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .cart-bounce {
+            animation: cartBounce 0.3s ease;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            /* Mobile Navigation */
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .mobile-cart-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--light);
+                padding: 80px 20px 20px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+            }
+            
+            nav ul li {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 16px;
+                border-bottom: 1px solid rgba(77, 151, 255, 0.1);
+                border-radius: 0;
+            }
+            
+            .cart-icon.desktop {
+                display: none;
+            }
+            
+            /* Page Header */
+            .page-header {
+                padding-top: 90px;
+                padding-bottom: 30px;
+            }
+            
+            .page-header h1 {
+                font-size: 24px;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 20px;
+            }
+            
+            .info-title,
+            .form-title {
+                font-size: 18px;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .info-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .faq-title,
+            .map-title {
+                font-size: 20px;
+            }
+            
+            /* Footer */
+            footer {
+                padding: 30px 0 15px;
+            }
+            
+            .footer-content {
+                gap: 25px;
+            }
+            
+            .footer-title {
+                font-size: 15px;
+            }
+            
+            .footer-links a {
+                font-size: 13px;
+            }
+            
+            .copyright {
+                font-size: 12px;
+            }
+            
+            .logo-text {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 22px;
+            }
+            
+            .faq-title,
+            .map-title {
+                font-size: 18px;
+            }
+            
+            .map-placeholder {
+                height: 300px;
+            }
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Touch-friendly improvements */
+        button, 
+        a, 
+        input, 
+        select, 
+        textarea {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        button, 
+        .submit-btn {
+            touch-action: manipulation;
+            user-select: none;
+        }
+        
+        /* Prevent text size adjustment on orientation change */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        /* Form success/error messages */
+        .form-message {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 0;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .form-message.success {
+            background-color: rgba(37, 211, 102, 0.1);
+            color: #1da851;
+            border: 2px solid #1da851;
+        }
+        
+        .form-message.error {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .loading-spinner.active {
+            display: block;
+        }
+        
+        .loading-spinner i {
+            animation: spin 1s linear infinite;
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-cube"></i>
+                <div class="logo-text"><span class="shimmer-part">MinevaID_</span></div>
+            </a>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Mobile Cart Toggle -->
+            <button class="mobile-cart-toggle" id="mobileCartToggle">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="mobile-cart-count">0</span>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="catalog.html" class="nav-link">Katalog</a></li>
+                    <li><a href="contact.html" class="nav-link active">Kontak</a></li>
+                    <li>
+                        <a href="#" class="cart-icon desktop" id="cartIcon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="shimmer-text">Hubungi Kami</h1>
+            <p>Ada pertanyaan tentang skin Minecraft? Butuh bantuan memilih skin yang tepat? Hubungi kami melalui berbagai cara di bawah ini.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-container">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2 class="info-title">Informasi Kontak</h2>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>WhatsApp Customer Service</h3>
+                            <p><a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a></p>
+                            <p>Fast response (5-10 menit)</p>
+                            <p>Senin - Minggu: 08:00 - 22:00 WIB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email Support</h3>
+                            <p><a href="mailto:support@minevaid.com">support@minevaid.com</a></p>
+                            <p>Respon dalam 1x24 jam kerja</p>
+                            <p>Untuk issue teknis dan invoice</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Komunitas Discord</h3>
+                            <p><a href="https://discord.gg/minecraftid" target="_blank">discord.gg/minecraftid</a></p>
+                            <p>Diskusi skin, showcase, tips</p>
+                            <p>Komunitas aktif 24/7</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://wa.me/6281234567890" class="social-link" target="_blank" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com/MinevaID" class="social-link" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/MinevaID" class="social-link" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://tiktok.com/@MinevaID" class="social-link" target="_blank" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://discord.gg/MinevaID" class="social-link" target="_blank" title="Discord">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2 class="form-title">Kirim Pesan Email</h2>
+                    <div id="formMessage"></div>
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <i class="fas fa-spinner"></i>
+                        <p>Mengirim pesan...</p>
+                    </div>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Alamat Email Anda</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subjek Pesan</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Pilih subjek...</option>
+                                <option value="Pertanyaan tentang produk">Pertanyaan tentang produk</option>
+                                <option value="Bantuan pemesanan">Bantuan pemesanan</option>
+                                <option value="Keluhan atau masalah">Keluhan atau masalah</option>
+                                <option value="Kerjasama atau partnership">Kerjasama atau partnership</option>
+                                <option value="Request skin custom">Request skin custom</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Pesan Anda</label>
+                            <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Kirim Email Sekarang
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="faq-title">Pertanyaan Umum</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Bagaimana cara membeli skin di MinevaID?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Pilih skin yang Anda inginkan dari katalog, lalu klik tombol "Pesan via WhatsApp". Anda akan diarahkan ke WhatsApp untuk melanjutkan proses pemesanan. Setelah konfirmasi pembayaran, skin akan dikirim ke email Anda dalam waktu 1x24 jam.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Apakah skin di MinevaID original?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Ya, semua skin di MinevaID adalah original dan dibuat khusus oleh desainer kami. Setiap skin memiliki lisensi penggunaan yang sah untuk Minecraft.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Berapa lama waktu pengiriman skin?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Skin akan dikirim ke email Anda maksimal 1x24 jam setelah pembayaran dikonfirmasi. Untuk skin custom atau pesanan khusus, waktu pengerjaan adalah 3-7 hari.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Apakah bisa request skin custom?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Ya, kami menerima pesanan skin custom. Silakan hubungi kami via WhatsApp atau email untuk mendiskusikan desain dan harga.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Metode pembayaran apa saja yang tersedia?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Kami menerima pembayaran melalui transfer bank (BCA, Mandiri, BRI), e-wallet (OVO, Dana, Gopay), QRIS, dan ShopeePay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3 class="footer-title shimmer-text">MinevaID</h3>
+                    <p>Toko skin Minecraft terpercaya dengan koleksi skin premium berkualitas tinggi. Kami menyediakan berbagai skin dengan desain pixel unik dan menarik.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Menu Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i>Beranda</a></li>
+                        <li><a href="catalog.html"><i class="fas fa-th-list"></i>Katalog</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i>Kontak</a></li>
+                        <li><a href="catalog.html?filter=special"><i class="fas fa-star"></i>Skin Spesial</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontak Kami</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+6281234567890"><i class="fas fa-phone"></i>+62 812-3456-7890</a></li>
+                        <li><a href="mailto:info@MinevaID.com"><i class="fas fa-envelope"></i>info@MinevaID.com</a></li>
+                        <li><a href="https://wa.me/6281234567890"><i class="fab fa-whatsapp"></i>WhatsApp</a></li>
+                        <li><a href="https://discord.gg/minecraftid"><i class="fab fa-discord"></i>Discord</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 MinevaID. Hak cipta dilindungi. Minecraft adalah merek dagang dari Mojang Studios. Skin yang dijual adalah karya orisinal dari desainer kami.</p>
+                <p>Website dibuat dengan ❤️ untuk komunitas Minecraft Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // CONFIGURASI EMAILJS - UBAH INI SESUAI DATA ANDA
+        // ============================================
+        // 1. Daftar di https://www.emailjs.com/
+        // 2. Dapatkan Public Key dari dashboard
+        // 3. Buat Service ID (hubungkan email Anda)
+        // 4. Buat Template Email
+        // 5. Isi data di bawah ini:
+        
+        const EMAILJS_CONFIG = {
+            PUBLIC_KEY: "YOUR_PUBLIC_KEY_HERE", // Ganti dengan Public Key Anda
+            SERVICE_ID: "YOUR_SERVICE_ID_HERE", // Ganti dengan Service ID Anda
+            TEMPLATE_ID: "YOUR_TEMPLATE_ID_HERE" // Ganti dengan Template ID Anda
+        };
+        
+        // Inisialisasi EmailJS dengan Public Key Anda
+        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+        
+        // ============================================
+        // FUNGSI UTAMA
+        // ============================================
+
+        // Mobile Navigation
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileCartToggle = document.getElementById('mobileCartToggle');
+        const mainNav = document.getElementById('mainNav');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Toggle mobile navigation
+        mobileNavToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+        });
+
+        mobileMenuOverlay.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Form Submission Handler
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validasi sederhana
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !subject || !message) {
+                showMessage('Harap isi semua field yang wajib diisi!', 'error');
+                return;
+            }
+            
+            // Validasi format email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showMessage('Format email tidak valid!', 'error');
+                return;
+            }
+            
+            // Show loading spinner
+            loadingSpinner.classList.add('active');
+            const submitBtn = this.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: "support@minevaid.com", // Email tujuan (bisa diubah di template)
+                date: new Date().toLocaleString('id-ID')
+            };
+            
+            // Send email using EmailJS
+            emailjs.send(
+                EMAILJS_CONFIG.SERVICE_ID, 
+                EMAILJS_CONFIG.TEMPLATE_ID, 
+                templateParams
+            )
+            .then(function(response) {
+                console.log('Email berhasil dikirim!', response.status, response.text);
+                showMessage('✅ Pesan berhasil dikirim! Kami akan membalas ke email Anda dalam 1x24 jam.', 'success');
+                contactForm.reset();
+            })
+            .catch(function(error) {
+                console.error('Error mengirim email:', error);
+                showMessage('❌ Gagal mengirim pesan. Silakan coba lagi atau hubungi kami via WhatsApp.', 'error');
+            })
+            .finally(function() {
+                // Hide loading spinner
+                loadingSpinner.classList.remove('active');
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Show message function
+        function showMessage(text, type) {
+            formMessage.innerHTML = `<div class="form-message ${type}">${text}</div>`;
+            
+            // Auto-hide message after 5 seconds
+            setTimeout(() => {
+                formMessage.innerHTML = '';
+            }, 5000);
+        }
+
+        // Cart functionality
+        let cartCount = 0;
+        const cartCountElements = document.querySelectorAll('.cart-count, .mobile-cart-count');
+
+        function updateCartCount() {
+            cartCountElements.forEach(el => {
+                el.textContent = cartCount;
+            });
+        }
+
+        // Demo: Add some items to cart
+        cartCount = 3; // For demo purposes
+        updateCartCount();
+
+        // Cart icon click
+        document.getElementById('cartIcon')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert(`Keranjang Anda memiliki ${cartCount} item. Fitur keranjang sedang dalam pengembangan.`);
+        });
+
+        mobileCartToggle?.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert(`Keranjang Anda memiliki ${cartCount} item. Fitur keranjang sedang dalam pengembangan.`);
+        });
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+            });
+        });
+        
+        // EmailJS Configuration Helper
+        console.log(`%c⚠️ PERHATIAN: Konfigurasi EmailJS`, 'color: #FF6B6B; font-weight: bold; font-size: 14px;');
+        console.log(`%cUntuk form email bisa bekerja, Anda perlu:`, 'color: #4d97ff;');
+        console.log(`1. Daftar di https://www.emailjs.com/`);
+        console.log(`2. Dapatkan Public Key, Service ID, dan Template ID`);
+        console.log(`3. Ganti nilai di EMAILJS_CONFIG pada bagian atas kode JavaScript`);
+        console.log(`%cSetup lengkap hanya perlu 5 menit!`, 'color: #1da851; font-weight: bold;');
+    </script>
+</body>
+</html>

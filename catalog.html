@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katalog Skin - MinevaID</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4d97ff;
+            --primary-dark: #2a75ff;
+            --secondary: #ffaa00;
+            --secondary-dark: #e69500;
+            --accent: #ff6b6b;
+            --light-blue: #e6f2ff;
+            --light: #ffffff;
+            --dark: #1a1a2e;
+            --gray: #2d3047;
+            --pixel-border: #3a3d5d;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --diamond: #b9f2ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(77, 151, 255, 0.1) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(255, 170, 0, 0.1) 0%, transparent 55%);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        /* Efek Teks Berkilau */
+        .shimmer-text {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s infinite linear;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 300% 0%;
+            }
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-toggle {
+            position: relative;
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(77, 151, 255, 0.1);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1001;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .logo-text .shimmer-part {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s infinite linear;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        nav {
+            transition: all 0.3s ease;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 15px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+            background-color: rgba(77, 151, 255, 0.1);
+        }
+        
+        nav a.active {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            color: var(--dark);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding-top: 100px;
+            padding-bottom: 40px;
+            background-color: var(--light);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .page-header h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        /* Catalog Section */
+        .catalog {
+            padding: 40px 0;
+        }
+        
+        .catalog-tools {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            background-color: var(--light);
+            padding: 20px;
+            border: 3px solid var(--pixel-border);
+            box-shadow: 5px 5px 0 rgba(77, 151, 255, 0.1);
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 2px solid var(--pixel-border);
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            background-color: var(--light-blue);
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(77, 151, 255, 0.1);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            background-color: var(--light-blue);
+            color: var(--dark);
+            border: 2px solid var(--pixel-border);
+            padding: 10px 16px;
+            border-radius: 0;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Press Start 2P', cursive;
+            min-width: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(77, 151, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+        
+        .filter-btn:hover:not(.active) {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sort-options select {
+            padding: 10px 15px;
+            border: 2px solid var(--pixel-border);
+            background-color: var(--light-blue);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .skin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .skin-card {
+            background-color: var(--light);
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 3px solid var(--pixel-border);
+            box-shadow: 5px 5px 0 rgba(77, 151, 255, 0.1);
+            position: relative;
+        }
+        
+        .skin-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 8px 8px 0 rgba(77, 151, 255, 0.2);
+        }
+        
+        .skin-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            z-index: 2;
+        }
+        
+        .skin-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            image-rendering: pixelated;
+            border-bottom: 3px solid var(--pixel-border);
+        }
+        
+        .skin-content {
+            padding: 16px;
+        }
+        
+        .skin-name {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.4;
+        }
+        
+        .skin-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .skin-price::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold), var(--secondary));
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        
+        .skin-desc {
+            color: var(--gray);
+            font-size: 13px;
+            margin-bottom: 18px;
+            height: 60px;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+        
+        .skin-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .spec-tag {
+            background-color: var(--light-blue);
+            color: var(--primary);
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 0;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .skin-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .btn-detail, .btn-buy {
+            padding: 9px 12px;
+            border-radius: 0;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 9px;
+            flex: 1;
+            text-align: center;
+            min-height: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-detail::before, .btn-buy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .btn-detail {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-detail:hover {
+            background-color: rgba(77, 151, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-detail:hover::before {
+            left: 100%;
+        }
+        
+        .btn-buy {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary-dark);
+        }
+        
+        .btn-buy:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-buy:hover::before {
+            left: 100%;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .page-btn {
+            padding: 10px 15px;
+            background-color: var(--light);
+            border: 2px solid var(--pixel-border);
+            color: var(--dark);
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .page-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+        
+        .page-btn:hover:not(.active) {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(26, 26, 46, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 15px;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: var(--light);
+            width: 100%;
+            max-width: 800px;
+            border-radius: 0;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px);
+            transition: transform 0.5s;
+            border: 5px solid var(--pixel-border);
+            box-shadow: 10px 10px 0 rgba(42, 117, 255, 0.3);
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            min-width: 40px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .modal-img {
+            flex: 1;
+            min-height: 250px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--pixel-border);
+            image-rendering: pixelated;
+        }
+        
+        .modal-content {
+            flex: 1;
+        }
+        
+        .modal-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-family: 'Press Start 2P', cursive;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .modal-price::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold), var(--diamond), var(--secondary));
+            background-size: 300% 100%;
+            animation: shimmer 4s infinite linear;
+        }
+        
+        .modal-desc {
+            margin-bottom: 18px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .modal-specs {
+            margin-bottom: 22px;
+        }
+        
+        .specs-title {
+            font-size: 15px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .specs-list {
+            list-style-type: none;
+        }
+        
+        .specs-list li {
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(77, 151, 255, 0.2);
+            color: var(--gray);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .specs-list li:before {
+            content: '▸';
+            color: var(--secondary);
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .whatsapp-order {
+            background-color: #25D366;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            transition: all 0.3s;
+            border: 3px solid #1da851;
+            font-family: 'Press Start 2P', cursive;
+            box-shadow: 5px 5px 0 rgba(29, 168, 81, 0.3);
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-order::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .whatsapp-order:hover {
+            background-color: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 6px 6px 0 rgba(29, 168, 81, 0.3);
+        }
+        
+        .whatsapp-order:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            padding: 40px 0 20px;
+            color: var(--light);
+            border-top: 5px solid var(--primary);
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col {
+            flex: 1;
+        }
+        
+        .footer-title {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-links i {
+            width: 20px;
+            margin-right: 8px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray);
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        /* Animation for cart */
+        @keyframes cartBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .cart-bounce {
+            animation: cartBounce 0.3s ease;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .modal-body {
+                flex-direction: row;
+            }
+            
+            .footer-content {
+                flex-direction: row;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            /* Mobile Navigation */
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .mobile-cart-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--light);
+                padding: 80px 20px 20px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+            }
+            
+            nav ul li {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 16px;
+                border-bottom: 1px solid rgba(77, 151, 255, 0.1);
+                border-radius: 0;
+            }
+            
+            .cart-icon.desktop {
+                display: none;
+            }
+            
+            /* Page Header */
+            .page-header {
+                padding-top: 90px;
+                padding-bottom: 30px;
+            }
+            
+            .page-header h1 {
+                font-size: 24px;
+            }
+            
+            .catalog-tools {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                min-width: 100%;
+            }
+            
+            .category-filters {
+                justify-content: center;
+            }
+            
+            .sort-options {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .skin-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .skin-img {
+                height: 150px;
+            }
+            
+            .skin-name {
+                font-size: 14px;
+            }
+            
+            .skin-price {
+                font-size: 16px;
+            }
+            
+            .skin-desc {
+                font-size: 12px;
+                height: 54px;
+            }
+            
+            .btn-detail, .btn-buy {
+                padding: 8px 10px;
+                font-size: 8px;
+                min-height: 36px;
+            }
+            
+            /* Modal */
+            .modal {
+                max-height: 85vh;
+            }
+            
+            .modal-header {
+                padding: 14px;
+            }
+            
+            .modal-title {
+                font-size: 16px;
+            }
+            
+            .modal-body {
+                padding: 16px;
+                gap: 20px;
+            }
+            
+            .modal-img {
+                min-height: 200px;
+            }
+            
+            .modal-price {
+                font-size: 20px;
+            }
+            
+            .modal-desc {
+                font-size: 14px;
+            }
+            
+            .specs-title {
+                font-size: 14px;
+            }
+            
+            .specs-list li {
+                font-size: 13px;
+            }
+            
+            .whatsapp-order {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+            
+            /* Footer */
+            footer {
+                padding: 30px 0 15px;
+            }
+            
+            .footer-content {
+                gap: 25px;
+            }
+            
+            .footer-title {
+                font-size: 15px;
+            }
+            
+            .footer-links a {
+                font-size: 13px;
+            }
+            
+            .copyright {
+                font-size: 12px;
+            }
+            
+            .logo-text {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .skin-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .page-header h1 {
+                font-size: 22px;
+            }
+            
+            .skin-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .btn-detail, .btn-buy {
+                width: 100%;
+            }
+            
+            .modal-overlay {
+                padding: 10px;
+            }
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Touch-friendly improvements */
+        button, 
+        a, 
+        input, 
+        select, 
+        textarea {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        button, 
+        .btn-detail, 
+        .btn-buy, 
+        .filter-btn, 
+        .page-btn {
+            touch-action: manipulation;
+            user-select: none;
+        }
+        
+        /* Prevent text size adjustment on orientation change */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-cube"></i>
+                <div class="logo-text"><span class="shimmer-part">MinevaID_</span></div>
+            </a>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Mobile Cart Toggle -->
+            <button class="mobile-cart-toggle" id="mobileCartToggle">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="mobile-cart-count">0</span>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="catalog.html" class="nav-link active">Katalog</a></li>
+                    <li><a href="contact.html" class="nav-link">Kontak</a></li>
+                    <li>
+                        <a href="#" class="cart-icon desktop" id="cartIcon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="shimmer-text">Katalog Skin Minecraft</h1>
+            <p>Temukan semua skin Minecraft premium kami di satu tempat. Filter berdasarkan kategori, harga, atau spesifikasi.</p>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog">
+        <div class="container">
+            <div class="catalog-tools">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari skin...">
+                </div>
+                
+                <div class="category-filters">
+                    <button class="filter-btn active" data-filter="all">Semua</button>
+                    <button class="filter-btn" data-filter="regular">Reguler</button>
+                    <button class="filter-btn" data-filter="special">Spesial</button>
+                    <button class="filter-btn" data-filter="couple">Couple</button>
+                </div>
+                
+                <div class="sort-options">
+                    <span>Urutkan:</span>
+                    <select id="sortSelect">
+                        <option value="default">Default</option>
+                        <option value="price-low">Harga: Rendah ke Tinggi</option>
+                        <option value="price-high">Harga: Tinggi ke Rendah</option>
+                        <option value="name">Nama: A-Z</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="skin-grid" id="skinGrid">
+                <!-- Skin cards will be generated by JavaScript -->
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Skin Details -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Detail Skin</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-img" id="modalImg"></div>
+                <div class="modal-content">
+                    <h2 class="modal-name shimmer-text" id="modalName">Nama Skin</h2>
+                    <div class="modal-price" id="modalPrice">Rp 0</div>
+                    <p class="modal-desc" id="modalDesc">Deskripsi skin</p>
+                    
+                    <div class="modal-specs">
+                        <h4 class="specs-title">Spesifikasi:</h4>
+                        <ul class="specs-list" id="modalSpecs">
+                            <!-- Specifications will be added by JavaScript -->
+                        </ul>
+                    </div>
+                    
+                    <a href="#" class="whatsapp-order" id="whatsappOrder" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3 class="footer-title shimmer-text">MinevaID</h3>
+                    <p>Toko skin Minecraft terpercaya dengan koleksi skin premium berkualitas tinggi. Kami menyediakan berbagai skin dengan desain pixel unik dan menarik.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Menu Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i>Beranda</a></li>
+                        <li><a href="catalog.html"><i class="fas fa-th-list"></i>Katalog</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i>Kontak</a></li>
+                        <li><a href="catalog.html?filter=special"><i class="fas fa-star"></i>Skin Spesial</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Kontak Kami</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+6281234567890"><i class="fas fa-phone"></i>+62 812-3456-7890</a></li>
+                        <li><a href="mailto:info@MinevaID.com"><i class="fas fa-envelope"></i>info@MinevaID.com</a></li>
+                        <li><a href="https://wa.me/6281234567890" target="_blank"><i class="fab fa-whatsapp"></i>WhatsApp</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i>Jakarta, Indonesia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 <span class="shimmer-text" style="font-size: 14px;">MinevaID</span>. All rights reserved. Minecraft is a trademark of Mojang AB.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data skin produk dengan tema Minecraft
+        const allSkins = [
+            {
+                id: 1,
+                name: "Pixel Warrior",
+                category: "special",
+                price: 75000,
+                description: "Skin dengan desain pixel warrior yang epik. Detail yang sangat bagus dengan tekstur pixel berkualitas tinggi.",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Pixel Warrior"]
+            },
+            {
+                id: 2,
+                name: "Cyber Miner",
+                category: "special",
+                price: 85000,
+                description: "Skin futuristic dengan tema miner cyberpunk. Cocok untuk pemain yang menyukai gaya teknologi tinggi.",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1468&q=80",
+                specs: ["Resolusi: 128x128", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Cyber Miner"]
+            },
+            {
+                id: 3,
+                name: "Forest Explorer",
+                category: "regular",
+                price: 45000,
+                description: "Skin dengan tema penjelajah hutan yang cocok untuk pemain yang suka bertualang di bioma hutan.",
+                image: "https://images.unsplash.com/photo-1531315630201-bb15abeb1653?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Forest Explorer"]
+            },
+            {
+                id: 4,
+                name: "Knight Pixel",
+                category: "regular",
+                price: 50000,
+                description: "Skin kesatria dengan armor pixel yang cocok untuk bertarung melawan mob berbahaya.",
+                image: "https://images.unsplash.com/photo-1630156704043-3f9c5c2e9bc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Knight Pixel"]
+            },
+            {
+                id: 5,
+                name: "Pixel Couple",
+                category: "couple",
+                price: 120000,
+                description: "Skin pasangan dengan tema pixel yang romantis. Cocok untuk bermain bersama pasangan.",
+                image: "https://images.unsplash.com/photo-1621330396175-92a4348e2e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64 (2 skin)", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Pixel Couple"]
+            },
+            {
+                id: 6,
+                name: "Ocean Pixel",
+                category: "regular",
+                price: 40000,
+                description: "Skin penjelajah lautan dengan detail peralatan menyelam pixel. Cocok untuk petualangan bawah laut.",
+                image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Ocean Pixel"]
+            },
+            {
+                id: 7,
+                name: "Phoenix Pixel",
+                category: "special",
+                price: 90000,
+                description: "Skin legendaris dengan tema burung phoenix pixel. Skin eksklusif dengan detail api yang mengagumkan.",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 128x128", "Format: PNG", "Kompatibel: Java Edition", "Animasi: Efek partikel", "Eksklusif: Ya", "Tema: Phoenix Pixel"]
+            },
+            {
+                id: 8,
+                name: "Hero & Villain Pixel",
+                category: "couple",
+                price: 150000,
+                description: "Skin pasangan pahlawan dan penjahat pixel. Cocok untuk roleplay dengan teman atau pasangan.",
+                image: "https://images.unsplash.com/photo-1621330396175-92a4348e2e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64 (2 skin)", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Ya", "Tema: Hero & Villain"]
+            },
+            {
+                id: 9,
+                name: "Dragon Slayer",
+                category: "special",
+                price: 95000,
+                description: "Skin pemburu naga dengan detail armor dan senjata yang mengagumkan.",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 128x128", "Format: PNG", "Kompatibel: Java Edition", "Animasi: Efek api", "Eksklusif: Ya", "Tema: Dragon Slayer"]
+            },
+            {
+                id: 10,
+                name: "Village Farmer",
+                category: "regular",
+                price: 35000,
+                description: "Skin petani desa yang sederhana namun menarik. Cocok untuk bermain di mode survival.",
+                image: "https://images.unsplash.com/photo-1630156704043-3f9c5c2e9bc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Village Farmer"]
+            },
+            {
+                id: 11,
+                name: "Wizard Mage",
+                category: "special",
+                price: 80000,
+                description: "Skin penyihir dengan jubah dan tongkat sihir. Sempurna untuk petualangan magis.",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1468&q=80",
+                specs: ["Resolusi: 128x128", "Format: PNG", "Kompatibel: Java Edition", "Animasi: Efek partikel", "Eksklusif: Ya", "Tema: Wizard Mage"]
+            },
+            {
+                id: 12,
+                name: "Ninja Assassin",
+                category: "regular",
+                price: 55000,
+                description: "Skin ninja dengan pakaian hitam dan senjata tersembunyi. Cocok untuk mode stealth.",
+                image: "https://images.unsplash.com/photo-1531315630201-bb15abeb1653?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                specs: ["Resolusi: 64x64", "Format: PNG", "Kompatibel: Java & Bedrock", "Animasi: Tidak", "Eksklusif: Tidak", "Tema: Ninja Assassin"]
+            }
+        ];
+
+        // Elemen DOM
+        const skinGrid = document.getElementById('skinGrid');
+        const pagination = document.getElementById('pagination');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModal = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalName = document.getElementById('modalName');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalImg = document.getElementById('modalImg');
+        const modalSpecs = document.getElementById('modalSpecs');
+        const whatsappOrder = document.getElementById('whatsappOrder');
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCountElement = document.querySelector('.cart-count');
+        const mobileCartCountElement = document.querySelector('.mobile-cart-count');
+        
+        // Mobile navigation elements
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileCartToggle = document.getElementById('mobileCartToggle');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mainNav = document.getElementById('mainNav');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // State variables
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let currentSort = 'default';
+        let currentPage = 1;
+        const itemsPerPage = 9;
+        let cartCount = 0;
+
+        // Format harga ke Rupiah
+        function formatRupiah(price) {
+            return `Rp ${price.toLocaleString('id-ID')}`;
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            cartCountElement.textContent = cartCount;
+            mobileCartCountElement.textContent = cartCount;
+        }
+
+        // Filter skins based on current state
+        function getFilteredSkins() {
+            let filtered = allSkins;
+            
+            // Apply filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(skin => skin.category === currentFilter);
+            }
+            
+            // Apply search
+            if (currentSearch) {
+                const searchLower = currentSearch.toLowerCase();
+                filtered = filtered.filter(skin => 
+                    skin.name.toLowerCase().includes(searchLower) || 
+                    skin.description.toLowerCase().includes(searchLower)
+                );
+            }
+            
+            // Apply sorting
+            filtered = [...filtered].sort((a, b) => {
+                switch (currentSort) {
+                    case 'price-low':
+                        return a.price - b.price;
+                    case 'price-high':
+                        return b.price - a.price;
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    default:
+                        return 0;
+                }
+            });
+            
+            return filtered;
+        }
+
+        // Render skins for current page
+        function renderSkins() {
+            const filteredSkins = getFilteredSkins();
+            const totalPages = Math.ceil(filteredSkins.length / itemsPerPage);
+            
+            // Adjust current page if necessary
+            if (currentPage > totalPages) {
+                currentPage = Math.max(1, totalPages);
+            }
+            
+            // Calculate slice indices
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageSkins = filteredSkins.slice(startIndex, endIndex);
+            
+            // Clear skin grid
+            skinGrid.innerHTML = '';
+            
+            // Render skin cards
+            pageSkins.forEach(skin => {
+                const skinCard = document.createElement('div');
+                skinCard.className = 'skin-card';
+                skinCard.dataset.category = skin.category;
+                skinCard.id = `skin-${skin.id}`;
+                
+                // Determine badge
+                let badge = '';
+                if (skin.category === 'special') badge = '<span class="skin-badge">SPESIAL</span>';
+                if (skin.category === 'couple') badge = '<span class="skin-badge">COUPLE</span>';
+                
+                skinCard.innerHTML = `
+                    ${badge}
+                    <div class="skin-img" style="background-image: url('${skin.image}')"></div>
+                    <div class="skin-content">
+                        <h3 class="skin-name">${skin.name}</h3>
+                        <div class="skin-price">${formatRupiah(skin.price)}</div>
+                        <p class="skin-desc">${skin.description}</p>
+                        <div class="skin-specs">
+                            <span class="spec-tag">${skin.specs[0]}</span>
+                            <span class="spec-tag">${skin.specs[2]}</span>
+                        </div>
+                        <div class="skin-actions">
+                            <button class="btn-detail" data-id="${skin.id}">Detail</button>
+                            <button class="btn-buy" data-id="${skin.id}">Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+                `;
+                
+                skinGrid.appendChild(skinCard);
+            });
+            
+            // Render pagination
+            renderPagination(totalPages);
+            
+            // Add event listeners to detail buttons
+            document.querySelectorAll('.btn-detail').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const skinId = parseInt(e.target.dataset.id);
+                    showSkinDetails(skinId);
+                    closeMobileMenu();
+                });
+            });
+            
+            // Add event listeners to buy buttons
+            document.querySelectorAll('.btn-buy').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const skinId = parseInt(e.target.dataset.id);
+                    addToCart(skinId);
+                    closeMobileMenu();
+                });
+            });
+            
+            // Update results count
+            const resultsCount = document.querySelector('.results-count') || document.createElement('div');
+            resultsCount.className = 'results-count';
+            resultsCount.textContent = `Menampilkan ${pageSkins.length} dari ${filteredSkins.length} skin`;
+            
+            if (!document.querySelector('.results-count')) {
+                document.querySelector('.catalog-tools').appendChild(resultsCount);
+            }
+        }
+
+        // Render pagination
+        function renderPagination(totalPages) {
+            pagination.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn';
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderSkins();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            pagination.appendChild(prevBtn);
+            
+            // Page buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderSkins();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                pagination.appendChild(pageBtn);
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn';
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderSkins();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        // Show skin details in modal
+        function showSkinDetails(skinId) {
+            const skin = allSkins.find(s => s.id === skinId);
+            if (!skin) return;
+            
+            modalTitle.textContent = 'Detail Skin';
+            modalName.textContent = skin.name;
+            modalPrice.textContent = formatRupiah(skin.price);
+            modalDesc.textContent = skin.description;
+            modalImg.style.backgroundImage = `url('${skin.image}')`;
+            
+            // Clear previous specs
+            modalSpecs.innerHTML = '';
+            
+            // Add new specs
+            skin.specs.forEach(spec => {
+                const li = document.createElement('li');
+                li.textContent = spec;
+                modalSpecs.appendChild(li);
+            });
+            
+            // Set WhatsApp link
+            const phoneNumber = "6281234567890";
+            const message = `Halo, saya ingin memesan skin Minecraft:\n\nNama: ${skin.name}\nHarga: ${formatRupiah(skin.price)}\n\nApakah skin ini tersedia?`;
+            const encodedMessage = encodeURIComponent(message);
+            whatsappOrder.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Show modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            closeMobileMenu();
+        }
+
+        // Add item to cart
+        function addToCart(skinId) {
+            cartCount++;
+            updateCartDisplay();
+            
+            // Find skin
+            const skin = allSkins.find(s => s.id === skinId);
+            
+            // Add bounce animation to cart icon
+            cartIcon.classList.add('cart-bounce');
+            setTimeout(() => {
+                cartIcon.classList.remove('cart-bounce');
+            }, 300);
+            
+            // Show notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background-color: var(--primary);
+                color: white;
+                padding: 12px 16px;
+                border-radius: 0;
+                z-index: 10000;
+                border: 3px solid var(--primary-dark);
+                box-shadow: 5px 5px 0 rgba(42, 117, 255, 0.3);
+                animation: slideIn 0.3s ease;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 11px;
+                max-width: 280px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <div><strong>${skin.name}</strong> ditambahkan ke keranjang!</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+            
+            closeMobileMenu();
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // Close mobile menu
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Check URL parameters for filter
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const filterParam = urlParams.get('filter');
+            
+            if (filterParam && ['all', 'regular', 'special', 'couple'].includes(filterParam)) {
+                currentFilter = filterParam;
+                
+                // Update active filter button
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.filter === currentFilter) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check URL parameters
+            checkUrlParams();
+            
+            // Render initial skins
+            renderSkins();
+            updateCartDisplay();
+            
+            // Set active nav link
+            navLinks.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Mobile navigation toggle
+            mobileNavToggle.addEventListener('click', toggleMobileMenu);
+            mobileCartToggle.addEventListener('click', () => {
+                // Simulate cart click
+                cartIcon.click();
+                closeMobileMenu();
+            });
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Close mobile menu when clicking on nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Filter button events
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Update filter and reset page
+                    currentFilter = button.dataset.filter;
+                    currentPage = 1;
+                    
+                    // Render skins
+                    renderSkins();
+                });
+            });
+            
+            // Search input event
+            searchInput.addEventListener('input', () => {
+                currentSearch = searchInput.value;
+                currentPage = 1;
+                renderSkins();
+            });
+            
+            // Sort select event
+            sortSelect.addEventListener('change', () => {
+                currentSort = sortSelect.value;
+                currentPage = 1;
+                renderSkins();
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', () => {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Add CSS for animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                @keyframes slideOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+                
+                .results-count {
+                    font-size: 14px;
+                    color: var(--gray);
+                    margin-top: 10px;
+                    text-align: center;
+                    width: 100%;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 767) {
+                    closeMobileMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

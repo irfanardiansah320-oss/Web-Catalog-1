@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Keranjang - MinevaID</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4d97ff;
+            --primary-dark: #2a75ff;
+            --secondary: #ffaa00;
+            --secondary-dark: #e69500;
+            --accent: #ff6b6b;
+            --light-blue: #e6f2ff;
+            --light: #ffffff;
+            --dark: #1a1a2e;
+            --gray: #2d3047;
+            --pixel-border: #3a3d5d;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --diamond: #b9f2ff;
+            --success: #25D366;
+            --success-dark: #1da851;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(77, 151, 255, 0.1) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(255, 170, 0, 0.1) 0%, transparent 55%);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        /* Efek Teks Berkilau */
+        .shimmer-text {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s infinite linear;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 300% 0%;
+            }
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-toggle {
+            position: relative;
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        .mobile-cart-count {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(77, 151, 255, 0.1);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1001;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .logo-text .shimmer-part {
+            background: linear-gradient(90deg, 
+                var(--primary) 0%, 
+                var(--gold) 20%, 
+                var(--diamond) 40%, 
+                var(--silver) 60%, 
+                var(--secondary) 80%, 
+                var(--primary) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s infinite linear;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        nav {
+            transition: all 0.3s ease;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 15px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+            background-color: rgba(77, 151, 255, 0.1);
+        }
+        
+        nav a.active {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            color: var(--dark);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding-top: 100px;
+            padding-bottom: 30px;
+            background-color: var(--light);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .page-header h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        /* Cart Section */
+        .cart-section {
+            padding: 40px 0 60px;
+            min-height: 60vh;
+        }
+        
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 992px) {
+            .cart-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Cart Items */
+        .cart-items {
+            background-color: var(--light);
+            border: 3px solid var(--pixel-border);
+            box-shadow: 8px 8px 0 rgba(42, 117, 255, 0.1);
+        }
+        
+        .cart-header {
+            padding: 20px;
+            border-bottom: 3px solid var(--pixel-border);
+            background-color: var(--light-blue);
+        }
+        
+        .cart-header h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cart-header h2 i {
+            color: var(--secondary);
+        }
+        
+        .cart-items-list {
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 2px solid var(--light-blue);
+            gap: 15px;
+            position: relative;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            image-rendering: pixelated;
+            border: 3px solid var(--pixel-border);
+            flex-shrink: 0;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-category {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 8px;
+            background-color: var(--light-blue);
+            padding: 3px 8px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 2px solid var(--pixel-border);
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: var(--light-blue);
+            border: none;
+            color: var(--dark);
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .quantity-input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border: none;
+            font-weight: bold;
+            font-family: 'Press Start 2P', cursive;
+            background-color: white;
+        }
+        
+        .remove-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .remove-btn:hover {
+            background-color: #ff5252;
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .cart-empty i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .cart-empty h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+        
+        .cart-empty p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .btn-back-to-shop {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 0;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            border: 3px solid var(--primary-dark);
+            transition: all 0.3s;
+        }
+        
+        .btn-back-to-shop:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Cart Summary */
+        .cart-summary {
+            background-color: var(--light);
+            border: 3px solid var(--pixel-border);
+            box-shadow: 8px 8px 0 rgba(42, 117, 255, 0.1);
+            padding: 25px;
+            position: sticky;
+            top: 120px;
+        }
+        
+        .summary-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--light-blue);
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .summary-label {
+            color: var(--gray);
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .summary-total {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .summary-total .summary-value {
+            font-size: 20px;
+            color: var(--secondary);
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .summary-promo {
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .promo-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .promo-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid var(--pixel-border);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .promo-input button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            border: 2px solid var(--primary-dark);
+        }
+        
+        .promo-input button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-checkout {
+            display: block;
+            width: 100%;
+            background-color: var(--success);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            border: 3px solid var(--success-dark);
+            margin-top: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-checkout::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .btn-checkout:hover {
+            background-color: var(--success-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 0 rgba(29, 168, 81, 0.3);
+        }
+        
+        .btn-checkout:hover::before {
+            left: 100%;
+        }
+        
+        .btn-checkout i {
+            margin-right: 10px;
+        }
+        
+        .btn-clear-cart {
+            display: block;
+            width: 100%;
+            background-color: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            padding: 12px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border: 2px solid var(--accent);
+            margin-top: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn-clear-cart:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        /* Modal Order Confirmation */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(26, 26, 46, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 15px;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: var(--light);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 0;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px);
+            transition: transform 0.5s;
+            border: 5px solid var(--pixel-border);
+            box-shadow: 10px 10px 0 rgba(42, 117, 255, 0.3);
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background-color: var(--success);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--success-dark);
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            min-width: 40px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .order-summary {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: var(--light-blue);
+            border: 2px solid var(--pixel-border);
+        }
+        
+        .order-summary h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .order-items {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(77, 151, 255, 0.2);
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 2px solid var(--pixel-border);
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--secondary);
+        }
+        
+        .modal-message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-message i {
+            font-size: 50px;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+        
+        .modal-message h3 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            padding: 40px 0 20px;
+            color: var(--light);
+            border-top: 5px solid var(--primary);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col {
+            flex: 1;
+        }
+        
+        .footer-title {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-links i {
+            width: 20px;
+            margin-right: 8px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray);
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 767px) {
+            /* Mobile Navigation */
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .mobile-cart-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--light);
+                padding: 80px 20px 20px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+            }
+            
+            nav ul li {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 16px;
+                border-bottom: 1px solid rgba(77, 151, 255, 0.1);
+                border-radius: 0;
+            }
+            
+            .cart-icon.desktop {
+                display: none;
+            }
+            
+            /* Page Header */
+            .page-header {
+                padding-top: 90px;
+                padding-bottom: 25px;
+            }
+            
+            .page-header h1 {
+                font-size: 24px;
+            }
+            
+            /* Cart Section */
+            .cart-section {
+                padding: 30px 0 50px;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .cart-item-img {
+                width: 100%;
+                height: 120px;
+            }
+            
+            .cart-item-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .cart-summary {
+                position: static;
+            }
+            
+            .logo-text {
+                font-size: 14px;
+            }
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Touch-friendly improvements */
+        button, 
+        a, 
+        input, 
+        select, 
+        textarea {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        button, 
+        .submit-btn {
+            touch-action: manipulation;
+            user-select: none;
+        }
+        
+        /* Prevent text size adjustment on orientation change */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .cart-item {
+            animation: slideIn 0.3s ease;
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 0;
+            border: 3px solid var(--success-dark);
+            box-shadow: 5px 5px 0 rgba(29, 168, 81, 0.3);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 300px;
+        }
+        
+        .notification.error {
+            background-color: var(--accent);
+            border-color: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-cube"></i>
+                <div class="logo-text"><span class="shimmer-part">MinevaID_</span></div>
+            </a>
+            
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" id="mobileNavToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Mobile Cart Toggle -->
+            <button class="mobile-cart-toggle" id="mobileCartToggle">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="mobile-cart-count">0</span>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="index.html#catalog" class="nav-link">Katalog</a></li>
+                    <li><a href="cart.html" class="nav-link active">Keranjang</a></li>
+                    <li><a href="contact.html" class="nav-link">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="shimmer-text">Keranjang Belanja</h1>
+            <p>Lihat dan kelola skin Minecraft yang akan Anda beli. Pesan semua sekaligus dengan mudah!</p>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-container">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <h2><i class="fas fa-shopping-cart"></i> Item Keranjang</h2>
+                    </div>
+                    
+                    <div class="cart-items-list" id="cartItemsList">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h2 class="summary-title">Ringkasan Pesanan</h2>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Total Item:</span>
+                        <span class="summary-value" id="totalItems">0 item</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal:</span>
+                        <span class="summary-value" id="subtotal">Rp 0</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Diskon:</span>
+                        <span class="summary-value" id="discount">Rp 0</span>
+                    </div>
+                    
+                    <div class="summary-row summary-total">
+                        <span class="summary-label">Total:</span>
+                        <span class="summary-value" id="totalPrice">Rp 0</span>
+                    </div>
+                    
+                    <div class="summary-promo">
+                        <div class="promo-input">
+                            <input type="text" id="promoCode" placeholder="Kode promo">
+                            <button id="applyPromo">Terapkan</button>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn-checkout" id="checkoutButton">
+                        <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                    </a>
+                    
+                    <button class="btn-clear-cart" id="clearCartButton">
+                        <i class="fas fa-trash"></i> Kosongkan Keranjang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Konfirmasi Pesanan</h3>
+                <button class="close-modal" id="closeOrderModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>PESANAN SIAP DIPROSES!</h3>
+                    <p>Klik tombol di bawah untuk melanjutkan ke WhatsApp.</p>
+                </div>
+                
+                <div class="order-summary">
+                    <h3>Ringkasan Pesanan:</h3>
+                    <div class="order-items" id="modalOrderItems">
+                        <!-- Order items will be loaded here -->
+                    </div>
+                    <div class="order-total">
+                        <span>TOTAL:</span>
+                        <span id="modalTotalPrice">Rp 0</span>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn-checkout" id="finalCheckoutButton" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Lanjutkan ke WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3 class="footer-title shimmer-text">MinevaID</h3>
+                    <p>Toko skin Minecraft terpercaya dengan koleksi skin premium berkualitas tinggi. Belanja dengan mudah melalui keranjang belanja kami.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Menu Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i>Beranda</a></li>
+                        <li><a href="index.html#catalog"><i class="fas fa-th-list"></i>Katalog Skin</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i>Keranjang</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i>Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Metode Pembayaran</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-university"></i>Transfer Bank</li>
+                        <li><i class="fas fa-wallet"></i>E-Wallet</li>
+                        <li><i class="fas fa-qrcode"></i>QRIS</li>
+                        <li><i class="fas fa-store"></i>Alfamart/Indomaret</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 <span class="shimmer-text" style="font-size: 14px;">MinevaID</span>. Hak cipta dilindungi. Minecraft adalah merek dagang dari Mojang Studios.</p>
+                <p>Website dibuat dengan ❤️ untuk komunitas Minecraft Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // DATA PRODUK (Sama dengan halaman utama)
+        // ============================================
+        const skins = [
+            {
+                id: 1,
+                name: "Pixel Warrior",
+                category: "special",
+                price: 75000,
+                description: "Skin dengan desain pixel warrior yang epik.",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            {
+                id: 2,
+                name: "Cyber Miner",
+                category: "special",
+                price: 85000,
+                description: "Skin futuristic dengan tema miner cyberpunk.",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1468&q=80"
+            },
+            {
+                id: 3,
+                name: "Forest Explorer",
+                category: "regular",
+                price: 45000,
+                description: "Skin dengan tema penjelajah hutan.",
+                image: "https://images.unsplash.com/photo-1531315630201-bb15abeb1653?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            {
+                id: 4,
+                name: "Knight Pixel",
+                category: "regular",
+                price: 50000,
+                description: "Skin kesatria dengan armor pixel.",
+                image: "https://images.unsplash.com/photo-1630156704043-3f9c5c2e9bc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            {
+                id: 5,
+                name: "Pixel Couple",
+                category: "couple",
+                price: 120000,
+                description: "Skin pasangan dengan tema pixel yang romantis.",
+                image: "https://images.unsplash.com/photo-1621330396175-92a4348e2e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+            },
+            {
+                id: 6,
+                name: "Ocean Pixel",
+                category: "regular",
+                price: 40000,
+                description: "Skin penjelajah lautan dengan detail pixel.",
+                image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+            }
+        ];
+
+        // ============================================
+        // VARIABEL DAN FUNGSI UTAMA
+        // ============================================
+        let cart = JSON.parse(localStorage.getItem('minevaid_cart')) || [];
+        let discount = 0;
+        let discountCode = null;
+
+        // DOM Elements
+        const cartItemsList = document.getElementById('cartItemsList');
+        const totalItemsElement = document.getElementById('totalItems');
+        const subtotalElement = document.getElementById('subtotal');
+        const discountElement = document.getElementById('discount');
+        const totalPriceElement = document.getElementById('totalPrice');
+        const checkoutButton = document.getElementById('checkoutButton');
+        const clearCartButton = document.getElementById('clearCartButton');
+        const applyPromoButton = document.getElementById('applyPromo');
+        const promoCodeInput = document.getElementById('promoCode');
+        const orderModal = document.getElementById('orderModal');
+        const closeOrderModal = document.getElementById('closeOrderModal');
+        const modalOrderItems = document.getElementById('modalOrderItems');
+        const modalTotalPrice = document.getElementById('modalTotalPrice');
+        const finalCheckoutButton = document.getElementById('finalCheckoutButton');
+        
+        // Mobile navigation elements
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileCartToggle = document.getElementById('mobileCartToggle');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mainNav = document.getElementById('mainNav');
+        const mobileCartCount = document.querySelector('.mobile-cart-count');
+        const desktopCartCount = document.querySelector('.cart-count');
+
+        // Format harga ke Rupiah
+        function formatRupiah(price) {
+            return `Rp ${price.toLocaleString('id-ID')}`;
+        }
+
+        // Simpan cart ke localStorage
+        function saveCart() {
+            localStorage.setItem('minevaid_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        // Update jumlah item di cart icon
+        function updateCartCount() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (mobileCartCount) mobileCartCount.textContent = totalCount;
+            if (desktopCartCount) desktopCartCount.textContent = totalCount;
+        }
+
+        // Hitung total harga cart
+        function calculateCartTotal() {
+            let subtotal = cart.reduce((sum, item) => {
+                const skin = skins.find(s => s.id === item.id);
+                return sum + (skin.price * item.quantity);
+            }, 0);
+            
+            let total = subtotal - discount;
+            if (total < 0) total = 0;
+            
+            return { subtotal, total };
+        }
+
+        // Update tampilan ringkasan cart
+        function updateCartSummary() {
+            const { subtotal, total } = calculateCartTotal();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            totalItemsElement.textContent = `${totalItems} item`;
+            subtotalElement.textContent = formatRupiah(subtotal);
+            discountElement.textContent = formatRupiah(discount);
+            totalPriceElement.textContent = formatRupiah(total);
+            
+            // Disable/Enable checkout button
+            checkoutButton.disabled = cart.length === 0;
+            checkoutButton.style.opacity = cart.length === 0 ? '0.5' : '1';
+            checkoutButton.style.cursor = cart.length === 0 ? 'not-allowed' : 'pointer';
+        }
+
+        // Render item cart
+        function renderCartItems() {
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>KERANJANG KOSONG</h3>
+                        <p>Tambahkan skin Minecraft favorit Anda ke keranjang!</p>
+                        <a href="index.html#catalog" class="btn-back-to-shop">Belanja Sekarang</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            cartItemsList.innerHTML = '';
+            
+            cart.forEach(item => {
+                const skin = skins.find(s => s.id === item.id);
+                if (!skin) return;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.dataset.id = item.id;
+                
+                cartItem.innerHTML = `
+                    <div class="cart-item-img" style="background-image: url('${skin.image}')"></div>
+                    <div class="cart-item-info">
+                        <h3 class="cart-item-name">${skin.name}</h3>
+                        <span class="cart-item-category">${skin.category.toUpperCase()}</span>
+                        <div class="cart-item-price">${formatRupiah(skin.price)}</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <div class="quantity-control">
+                            <button class="quantity-btn decrease-btn">-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="10">
+                            <button class="quantity-btn increase-btn">+</button>
+                        </div>
+                        <button class="remove-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                cartItemsList.appendChild(cartItem);
+                
+                // Add event listeners for this item
+                const decreaseBtn = cartItem.querySelector('.decrease-btn');
+                const increaseBtn = cartItem.querySelector('.increase-btn');
+                const quantityInput = cartItem.querySelector('.quantity-input');
+                const removeBtn = cartItem.querySelector('.remove-btn');
+                
+                decreaseBtn.addEventListener('click', () => {
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                        quantityInput.value = item.quantity;
+                        saveCart();
+                        updateCartSummary();
+                    }
+                });
+                
+                increaseBtn.addEventListener('click', () => {
+                    if (item.quantity < 10) {
+                        item.quantity++;
+                        quantityInput.value = item.quantity;
+                        saveCart();
+                        updateCartSummary();
+                    }
+                });
+                
+                quantityInput.addEventListener('change', (e) => {
+                    const newQuantity = parseInt(e.target.value);
+                    if (newQuantity >= 1 && newQuantity <= 10) {
+                        item.quantity = newQuantity;
+                        saveCart();
+                        updateCartSummary();
+                    } else {
+                        e.target.value = item.quantity;
+                    }
+                });
+                
+                removeBtn.addEventListener('click', () => {
+                    removeFromCart(item.id);
+                });
+            });
+        }
+
+        // Hapus item dari cart
+        function removeFromCart(skinId) {
+            cart = cart.filter(item => item.id !== skinId);
+            saveCart();
+            renderCartItems();
+            updateCartSummary();
+            showNotification('Item dihapus dari keranjang!', 'success');
+        }
+
+        // Kosongkan cart
+        function clearCart() {
+            if (cart.length === 0) {
+                showNotification('Keranjang sudah kosong!', 'error');
+                return;
+            }
+            
+            if (confirm('Apakah Anda yakin ingin mengosongkan keranjang?')) {
+                cart = [];
+                discount = 0;
+                discountCode = null;
+                promoCodeInput.value = '';
+                saveCart();
+                renderCartItems();
+                updateCartSummary();
+                showNotification('Keranjang berhasil dikosongkan!', 'success');
+            }
+        }
+
+        // Terapkan kode promo
+        function applyPromoCode() {
+            const code = promoCodeInput.value.trim().toUpperCase();
+            
+            if (!code) {
+                showNotification('Masukkan kode promo!', 'error');
+                return;
+            }
+            
+            // Cek kode promo
+            const promoCodes = {
+                'MINECRAFT10': 0.1,  // Diskon 10%
+                'PIXEL15': 0.15,      // Diskon 15%
+                'NEWYEAR20': 0.2      // Diskon 20%
+            };
+            
+            if (promoCodes[code]) {
+                if (discountCode === code) {
+                    showNotification('Kode promo sudah digunakan!', 'error');
+                    return;
+                }
+                
+                const { subtotal } = calculateCartTotal();
+                discount = Math.floor(subtotal * promoCodes[code]);
+                discountCode = code;
+                
+                updateCartSummary();
+                showNotification(`Kode promo "${code}" berhasil digunakan! Diskon: ${formatRupiah(discount)}`, 'success');
+                promoCodeInput.value = '';
+            } else {
+                showNotification('Kode promo tidak valid!', 'error');
+            }
+        }
+
+        // Tampilkan notifikasi
+        function showNotification(message, type = 'success') {
+            // Hapus notifikasi sebelumnya
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Hapus notifikasi setelah 3 detik
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 300);
+                }
+            }, 3000);
+            
+            // Tambahkan keyframes untuk slideOut
+            if (!document.querySelector('#slideOutAnim')) {
+                const style = document.createElement('style');
+                style.id = 'slideOutAnim';
+                style.textContent = `
+                    @keyframes slideOut {
+                        from {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                        to {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Siapkan pesan WhatsApp
+        function prepareWhatsAppMessage() {
+            const { total } = calculateCartTotal();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            let message = `*PESANAN MINECOIN SKIN - MINEWAID STORE*\n\n`;
+            message += `*Nama:* [Isi Nama Anda]\n`;
+            message += `*Total Item:* ${totalItems} skin\n`;
+            message += `*Metode Pembayaran:* [Transfer Bank/E-wallet/QRIS]\n\n`;
+            message += `*DETAIL PESANAN:*\n`;
+            
+            cart.forEach(item => {
+                const skin = skins.find(s => s.id === item.id);
+                message += `• ${skin.name} (${item.quantity}x) - ${formatRupiah(skin.price * item.quantity)}\n`;
+            });
+            
+            message += `\n*Subtotal:* ${formatRupiah(calculateCartTotal().subtotal)}\n`;
+            if (discount > 0) {
+                message += `*Diskon (${discountCode}):* -${formatRupiah(discount)}\n`;
+            }
+            message += `*TOTAL BAYAR:* ${formatRupiah(total)}\n\n`;
+            message += `_*Setelah mengirim pesan ini, harap konfirmasi dengan admin untuk proses selanjutnya._*\n`;
+            message += `_*Pembayaran maksimal 1x24 jam setelah konfirmasi pesanan._*`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Tampilkan modal konfirmasi pesanan
+        function showOrderConfirmation() {
+            if (cart.length === 0) {
+                showNotification('Keranjang kosong! Tambahkan item terlebih dahulu.', 'error');
+                return;
+            }
+            
+            // Isi modal dengan item pesanan
+            modalOrderItems.innerHTML = '';
+            cart.forEach(item => {
+                const skin = skins.find(s => s.id === item.id);
+                const orderItem = document.createElement('div');
+                orderItem.className = 'order-item';
+                orderItem.innerHTML = `
+                    <span>${skin.name} (${item.quantity}x)</span>
+                    <span>${formatRupiah(skin.price * item.quantity)}</span>
+                `;
+                modalOrderItems.appendChild(orderItem);
+            });
+            
+            // Update total di modal
+            const { total } = calculateCartTotal();
+            modalTotalPrice.textContent = formatRupiah(total);
+            
+            // Update WhatsApp link di modal
+            const phoneNumber = "6281234567890"; // Ganti dengan nomor WhatsApp Anda
+            const message = prepareWhatsAppMessage();
+            finalCheckoutButton.href = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            // Tampilkan modal
+            orderModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // Close mobile menu
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load cart dari localStorage
+            updateCartCount();
+            renderCartItems();
+            updateCartSummary();
+            
+            // Mobile navigation
+            mobileNavToggle.addEventListener('click', toggleMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            mobileCartToggle.addEventListener('click', () => {
+                // Scroll to cart section
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                closeMobileMenu();
+            });
+            
+            // Close mobile menu when clicking nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Tombol checkout
+            checkoutButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (cart.length > 0) {
+                    showOrderConfirmation();
+                }
+            });
+            
+            // Tombol kosongkan cart
+            clearCartButton.addEventListener('click', clearCart);
+            
+            // Tombol terapkan promo
+            applyPromoButton.addEventListener('click', applyPromoCode);
+            promoCodeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    applyPromoCode();
+                }
+            });
+            
+            // Tombol close modal
+            closeOrderModal.addEventListener('click', () => {
+                orderModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal ketika klik di luar
+            orderModal.addEventListener('click', (e) => {
+                if (e.target === orderModal) {
+                    orderModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Cek promo code yang sudah aktif
+            if (discountCode && discount > 0) {
+                promoCodeInput.value = discountCode;
+            }
+            
+            // Tambahkan event listener untuk halaman sebelum di-unload
+            window.addEventListener('beforeunload', () => {
+                saveCart();
+            });
+        });
+    </script>
+</body>
+</html>
